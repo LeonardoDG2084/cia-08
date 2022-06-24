@@ -1,7 +1,7 @@
 module "turma08" {
  source = "terraform-aws-modules/vpc/aws" 
  name = var.vpc_name
- cidr = "10.0.0.0/16" 
+ cidr = var.cidr
 
  azs = [ "us-east-1a", "us-east-1b" ]
  public_subnets = var.cidr_subnet_public

@@ -1,3 +1,4 @@
 locals {
-   name = format("%s-%s", var.project, var.env)
+  name = format("%s-%s", var.project, local.env)
+  env = terraform.workspace
 }

@@ -1,11 +1,6 @@
 variable "project" {
-  type = string
+  type    = string
   default = "coxinha"
-}
-
-variable "env" {
-  type = string
-  default = "dev"
 }
 
 variable "cidr_block" {
@@ -13,15 +8,20 @@ variable "cidr_block" {
 }
 
 variable "instance_type_app" {
-  type = string
-  default = "t2.micro"
+  type    = map
+  default = {
+    dev  = "t2.micro"
+    qa   = "t3.large"
+    prod = "t3.medium"
+  }
 }
 
 variable "instance_type_mongodb" {
-  type = string
+  type    = string
   default = "t2.small"
 }
 
 variable "vpc_name" {
   type = string
 }
+

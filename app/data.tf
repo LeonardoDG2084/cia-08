@@ -8,7 +8,7 @@ data "aws_ami" "amazon-lnx" {
   }
 
   filter {
-    name  = "architecture"
+    name   = "architecture"
     values = ["x86_64"]
   }
 }
@@ -19,8 +19,7 @@ data "aws_subnet" "app-public-subnet" {
 
 data "aws_vpc" "vpc" {
   filter {
-    name = "tag:Name"
+    name   = "tag:Name"
     values = [var.vpc_name]
-
   }
 }
