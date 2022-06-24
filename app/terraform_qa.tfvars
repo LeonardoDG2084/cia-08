@@ -1,0 +1,6 @@
+project               = "leonardo"
+cidr_block            = "10.0.100.0/24"
+env                   = "dev"
+instance_type_app     = "t2.micro"
+instance_type_mongodb = "t2.small"
+vpc_name              = "turma-08"
