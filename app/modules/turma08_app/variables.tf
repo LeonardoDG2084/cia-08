@@ -52,5 +52,10 @@ variable "vpc_name" {
 
 variable "create_zone_dns" {
   type = bool
-  default = false
+  default = true
+}
+
+variable "env" {
+  type = string
+  default = "dev"
 }

@@ -25,14 +25,14 @@ data "aws_vpc" "vpc" {
 }
 
 data "template_file" "ec2-mongodb" {
-  template = file("mongodb.sh")
+  template = file("${path.module}/files/mongodb.sh")
   vars = {
     version = var.mongodb_version
   }
 }
 
 data "template_file" "ec2-app" {
-  template = file("ec2.sh")
+  template = file("${path.module}/files/ec2.sh")
   vars = {
     image = lookup(var.ec2-app, "image")
     version = lookup(var.ec2-app, "version")
