@@ -67,7 +67,6 @@ resource "aws_security_group" "allow-http-ssh" {
       self             = null
     }
   ]
-
   egress = [
     {
       description      = "Allow all"

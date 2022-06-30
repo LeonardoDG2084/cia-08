@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 module "turma08_app" {
     source = "./modules/turma08_app"
@@ -13,11 +12,3 @@ output "ip_app" {
   value = module.turma08_app.app_public_ip
 }
 
-variable "cidr_block" {
-  type = string
-  default = "10.0.100.0/24"
-
-variable "env" {
-  type = string
-  default = "dev" 
-}
