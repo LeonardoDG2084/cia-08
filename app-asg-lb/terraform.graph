@@ -1,0 +1,96 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_alb.app-alb (expand)" [label = "aws_alb.app-alb", shape = "box"]
+		"[root] aws_autoscaling_attachment.app-auto-attach (expand)" [label = "aws_autoscaling_attachment.app-auto-attach", shape = "box"]
+		"[root] aws_autoscaling_group.app-asg (expand)" [label = "aws_autoscaling_group.app-asg", shape = "box"]
+		"[root] aws_autoscaling_policy.app-scale-down (expand)" [label = "aws_autoscaling_policy.app-scale-down", shape = "box"]
+		"[root] aws_autoscaling_policy.app-scale-up (expand)" [label = "aws_autoscaling_policy.app-scale-up", shape = "box"]
+		"[root] aws_cloudwatch_metric_alarm.app-scale-down (expand)" [label = "aws_cloudwatch_metric_alarm.app-scale-down", shape = "box"]
+		"[root] aws_cloudwatch_metric_alarm.app-scale-up (expand)" [label = "aws_cloudwatch_metric_alarm.app-scale-up", shape = "box"]
+		"[root] aws_instance.mongodb (expand)" [label = "aws_instance.mongodb", shape = "box"]
+		"[root] aws_key_pair.app_ssh_key (expand)" [label = "aws_key_pair.app_ssh_key", shape = "box"]
+		"[root] aws_launch_template.app_template (expand)" [label = "aws_launch_template.app_template", shape = "box"]
+		"[root] aws_lb_listener.app_lb_listener (expand)" [label = "aws_lb_listener.app_lb_listener", shape = "box"]
+		"[root] aws_lb_target_group.app-tg (expand)" [label = "aws_lb_target_group.app-tg", shape = "box"]
+		"[root] aws_network_interface_sg_attachment.mongodb-sg-attach (expand)" [label = "aws_network_interface_sg_attachment.mongodb-sg-attach", shape = "box"]
+		"[root] aws_placement_group.app_placement_group (expand)" [label = "aws_placement_group.app_placement_group", shape = "box"]
+		"[root] aws_security_group.allow-http-ssh (expand)" [label = "aws_security_group.allow-http-ssh", shape = "box"]
+		"[root] aws_security_group.allow_mongodb (expand)" [label = "aws_security_group.allow_mongodb", shape = "box"]
+		"[root] data.aws_ami.app_ami (expand)" [label = "data.aws_ami.app_ami", shape = "box"]
+		"[root] data.aws_subnet.app_subnet (expand)" [label = "data.aws_subnet.app_subnet", shape = "box"]
+		"[root] data.aws_subnet.app_subnet2 (expand)" [label = "data.aws_subnet.app_subnet2", shape = "box"]
+		"[root] data.aws_vpc.vpc (expand)" [label = "data.aws_vpc.vpc", shape = "box"]
+		"[root] data.template_file.app_startup_script (expand)" [label = "data.template_file.app_startup_script", shape = "box"]
+		"[root] data.template_file.mongodb_startup_script (expand)" [label = "data.template_file.mongodb_startup_script", shape = "box"]
+		"[root] output.ip_address_mongodb" [label = "output.ip_address_mongodb", shape = "note"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/template\"]" [label = "provider[\"registry.terraform.io/hashicorp/template\"]", shape = "diamond"]
+		"[root] var.app_docker" [label = "var.app_docker", shape = "note"]
+		"[root] var.cidr_block" [label = "var.cidr_block", shape = "note"]
+		"[root] var.cidr_block2" [label = "var.cidr_block2", shape = "note"]
+		"[root] var.env" [label = "var.env", shape = "note"]
+		"[root] var.instance_type" [label = "var.instance_type", shape = "note"]
+		"[root] var.project" [label = "var.project", shape = "note"]
+		"[root] var.vpc_name" [label = "var.vpc_name", shape = "note"]
+		"[root] aws_alb.app-alb (expand)" -> "[root] aws_security_group.allow-http-ssh (expand)"
+		"[root] aws_alb.app-alb (expand)" -> "[root] data.aws_subnet.app_subnet (expand)"
+		"[root] aws_alb.app-alb (expand)" -> "[root] data.aws_subnet.app_subnet2 (expand)"
+		"[root] aws_autoscaling_attachment.app-auto-attach (expand)" -> "[root] aws_autoscaling_group.app-asg (expand)"
+		"[root] aws_autoscaling_group.app-asg (expand)" -> "[root] aws_launch_template.app_template (expand)"
+		"[root] aws_autoscaling_group.app-asg (expand)" -> "[root] aws_lb_target_group.app-tg (expand)"
+		"[root] aws_autoscaling_group.app-asg (expand)" -> "[root] aws_placement_group.app_placement_group (expand)"
+		"[root] aws_autoscaling_policy.app-scale-down (expand)" -> "[root] aws_autoscaling_group.app-asg (expand)"
+		"[root] aws_autoscaling_policy.app-scale-up (expand)" -> "[root] aws_autoscaling_group.app-asg (expand)"
+		"[root] aws_cloudwatch_metric_alarm.app-scale-down (expand)" -> "[root] aws_autoscaling_policy.app-scale-down (expand)"
+		"[root] aws_cloudwatch_metric_alarm.app-scale-up (expand)" -> "[root] aws_autoscaling_policy.app-scale-up (expand)"
+		"[root] aws_instance.mongodb (expand)" -> "[root] aws_key_pair.app_ssh_key (expand)"
+		"[root] aws_instance.mongodb (expand)" -> "[root] data.aws_ami.app_ami (expand)"
+		"[root] aws_instance.mongodb (expand)" -> "[root] data.aws_subnet.app_subnet (expand)"
+		"[root] aws_instance.mongodb (expand)" -> "[root] data.template_file.mongodb_startup_script (expand)"
+		"[root] aws_instance.mongodb (expand)" -> "[root] var.instance_type"
+		"[root] aws_key_pair.app_ssh_key (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_key_pair.app_ssh_key (expand)" -> "[root] var.env"
+		"[root] aws_key_pair.app_ssh_key (expand)" -> "[root] var.project"
+		"[root] aws_launch_template.app_template (expand)" -> "[root] aws_security_group.allow-http-ssh (expand)"
+		"[root] aws_launch_template.app_template (expand)" -> "[root] data.template_file.app_startup_script (expand)"
+		"[root] aws_lb_listener.app_lb_listener (expand)" -> "[root] aws_alb.app-alb (expand)"
+		"[root] aws_lb_listener.app_lb_listener (expand)" -> "[root] aws_lb_target_group.app-tg (expand)"
+		"[root] aws_lb_target_group.app-tg (expand)" -> "[root] data.aws_vpc.vpc (expand)"
+		"[root] aws_lb_target_group.app-tg (expand)" -> "[root] var.env"
+		"[root] aws_lb_target_group.app-tg (expand)" -> "[root] var.project"
+		"[root] aws_network_interface_sg_attachment.mongodb-sg-attach (expand)" -> "[root] aws_instance.mongodb (expand)"
+		"[root] aws_network_interface_sg_attachment.mongodb-sg-attach (expand)" -> "[root] aws_security_group.allow_mongodb (expand)"
+		"[root] aws_placement_group.app_placement_group (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_placement_group.app_placement_group (expand)" -> "[root] var.env"
+		"[root] aws_placement_group.app_placement_group (expand)" -> "[root] var.project"
+		"[root] aws_security_group.allow-http-ssh (expand)" -> "[root] data.aws_vpc.vpc (expand)"
+		"[root] aws_security_group.allow-http-ssh (expand)" -> "[root] var.env"
+		"[root] aws_security_group.allow-http-ssh (expand)" -> "[root] var.project"
+		"[root] aws_security_group.allow_mongodb (expand)" -> "[root] data.aws_vpc.vpc (expand)"
+		"[root] aws_security_group.allow_mongodb (expand)" -> "[root] var.env"
+		"[root] aws_security_group.allow_mongodb (expand)" -> "[root] var.project"
+		"[root] data.aws_ami.app_ami (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_subnet.app_subnet (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_subnet.app_subnet (expand)" -> "[root] var.cidr_block"
+		"[root] data.aws_subnet.app_subnet2 (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_subnet.app_subnet2 (expand)" -> "[root] var.cidr_block2"
+		"[root] data.aws_vpc.vpc (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] data.aws_vpc.vpc (expand)" -> "[root] var.vpc_name"
+		"[root] data.template_file.app_startup_script (expand)" -> "[root] aws_instance.mongodb (expand)"
+		"[root] data.template_file.app_startup_script (expand)" -> "[root] var.app_docker"
+		"[root] data.template_file.mongodb_startup_script (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/template\"]"
+		"[root] output.ip_address_mongodb" -> "[root] aws_instance.mongodb (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_autoscaling_attachment.app-auto-attach (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_cloudwatch_metric_alarm.app-scale-down (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_cloudwatch_metric_alarm.app-scale-up (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_lb_listener.app_lb_listener (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_network_interface_sg_attachment.mongodb-sg-attach (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/template\"] (close)" -> "[root] data.template_file.app_startup_script (expand)"
+		"[root] root" -> "[root] output.ip_address_mongodb"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/template\"] (close)"
+	}
+}
+

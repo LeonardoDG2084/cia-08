@@ -17,6 +17,10 @@ data "aws_subnet" "app_subnet" {
   cidr_block = var.cidr_block
 }
 
+data "aws_subnet" "app_subnet2" {
+  cidr_block = var.cidr_block2
+}
+
 data "template_file" "mongodb_startup_script" {
   template = file("mongodb.sh")
   vars = {
