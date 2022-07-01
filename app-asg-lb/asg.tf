@@ -7,3 +7,31 @@ resource "aws_launch_template" "app_template" {
   vpc_security_group_ids = [aws_security_group.allow-http-ssh.id]
 }
 
+resource "aws_autoscaling_group" "app-asg" {
+  name = format("%s-asg-%s", var.project, var.env)
+  max_size = 5
+  min_size = 1
+  health_check_grace_period = 150
+  health_check_type = ELB
+  desired_capacity = 2
+  force_delete = true
+  placement_group = aws_placement_group.app_placement_group.id
+  vpc_zone_identifier = [data.aws_subnet.app_subnet.id]
+  target_group_arns = [aws_lb_target_group.app-tg.arn]
+
+  launch_template {
+    id = aws_launch_template.app_template.id
+    version = "$Latest"
+  }
+ 
+  timeouts {
+    delete = "15m"
+  }
+
+}
+
+resource "aws_placement_group" "app_placement_group" {
+  name = format("%s-pl_grp-%s", var.project, var.env)
+  strategy = "spread"
+}
+
