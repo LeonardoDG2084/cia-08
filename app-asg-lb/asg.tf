@@ -12,7 +12,7 @@ resource "aws_autoscaling_group" "app-asg" {
   max_size = 5
   min_size = 1
   health_check_grace_period = 150
-  health_check_type = ELB
+  health_check_type = "ELB"
   desired_capacity = 2
   force_delete = true
   placement_group = aws_placement_group.app_placement_group.id

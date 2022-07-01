@@ -9,7 +9,7 @@ resource "aws_security_group" "allow_mongodb" {
       from_port        = 27017
       to_port          = 27017
       protocol         = "tcp"
-      cidr_block       = ["0.0.0.0/0"]
+      cidr_blocks       = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = []
@@ -23,7 +23,7 @@ resource "aws_security_group" "allow_mongodb" {
       from_port        = 0
       to_port          = 0
       protocol         = "tcp"
-      cidr_block       = ["0.0.0.0/0"]
+      cidr_blocks       = ["0.0.0.0/0"]
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       security_groups  = []

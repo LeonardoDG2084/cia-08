@@ -1,8 +1,8 @@
 resource "aws_alb" "app-alb" {
    name = format("%s-app-lb-%s", var.project, var.env)
    internal = false
-   load_balance_type = "application"
-   security_groups = [aws_security_group.allow-http-ssh]
+   load_balancer_type = "application"
+   security_groups = [aws_security_group.allow-http-ssh.id]
    subnets = [data.aws_subnet.app_subnet.id]
 }
 
