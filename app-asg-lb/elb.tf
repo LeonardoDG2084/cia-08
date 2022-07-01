@@ -3,13 +3,13 @@ resource "aws_alb" "app-alb" {
    internal = false
    load_balancer_type = "application"
    security_groups = [aws_security_group.allow-http-ssh.id]
-   subnets = [data.aws_subnet.app_subnet.id]
+   subnets = [data.aws_subnet.app_subnet.id, data.aws_subnet.app_subnet2.id]
 }
 
 resource "aws_lb_listener" "app_lb_listener" {
     load_balancer_arn = aws_alb.app-alb.arn
     port = "80"
-    protocol = "tcp"
+    protocol = "HTTP"
 
     default_action {
       target_group_arn = aws_lb_target_group.app-tg.arn

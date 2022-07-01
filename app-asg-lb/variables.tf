@@ -16,6 +16,10 @@ variable "cidr_block" {
   type = string
 }
 
+variable "cidr_block2" {
+  type = string
+}
+
 variable "project" {
   type = string
 }
