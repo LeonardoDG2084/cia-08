@@ -35,3 +35,27 @@ resource "aws_placement_group" "app_placement_group" {
   strategy = "spread"
 }
 
+resource "aws_autoscaling_policy" "app-scale-up" {
+  name = format("%s-scale-up-%s", var.project, var.env)
+  scaling_adjustment = 1
+  adjustment_type = "ChangeInCapacity"
+  cooldown = 300
+  autoscaling_group_name = aws_autoscaling_group.app-asg.name
+  policy_type = "SimpleScaling"
+}
+
+resource "aws_autoscaling_policy" "app-scale-down" {
+  name = format("%s-scale-down-%s", var.project, var.env)
+  scaling_adjustment = -1
+  adjustment_type = "ChangeInCapacity"
+  cooldown = 300
+  autoscaling_group_name = aws_autoscaling_group.app-asg.name
+  policy_type = "SimpleScaling"
+}
+
+resource "aws_autoscaling_attachment" "app-auto-attach" {
+  autoscaling_group_name = aws_autoscaling_group.app-asg.id
+  alb_target_group_arn = aws_lb_target_group.app-tg.arn
+}
+
+

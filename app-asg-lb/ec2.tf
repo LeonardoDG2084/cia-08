@@ -1,7 +1,7 @@
 resource "aws_instance" "mongodb" {
   ami                         = data.aws_ami.app_ami.id
   instance_type               = lookup(var.instance_type, var.env)
-  subnet_id                   = data.aws_subnet.app_subnet
+  subnet_id                   = data.aws_subnet.app_subnet.id
   associate_public_ip_address = false
   tags = {
     Name = format("%s-mongodb_server-%s", var.project, var.env)
